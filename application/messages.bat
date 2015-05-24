@@ -1,0 +1,1 @@
+yii message/extract messages/config.php env=dev

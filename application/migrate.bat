@@ -1,0 +1,1 @@
+yii migrate env=dev
