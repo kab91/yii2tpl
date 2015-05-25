@@ -9,46 +9,46 @@ use yii\base\Model;
  */
 class PasswordResetRequestForm extends Model
 {
-	public $email;
+    public $email;
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			['email', 'filter', 'filter' => 'trim'],
-			['email', 'required'],
-			['email', 'email'],
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            ['email', 'filter', 'filter' => 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+        ];
+    }
 
-	/**
-	 *
-	 * @return boolean sends an email
-	 */
-	public function sendEmail()
-	{
-		/** @var User $user */
-		$user = User::findOne([
-			'idstatus' => User::STATUS_ACTIVE,
-			'email' => $this->email,
-		]);
+    /**
+     *
+     * @return boolean sends an email
+     */
+    public function sendEmail()
+    {
+        /** @var User $user */
+        $user = User::findOne([
+            'idstatus' => User::STATUS_ACTIVE,
+            'email' => $this->email,
+        ]);
 
-		if (!$user) {
-			return false;
-		}
+        if (!$user) {
+            return false;
+        }
 
-		$user->generatePasswordResetToken();
-		if ($user->save()) {
-			return \Yii::$app->mail->compose('passwordResetToken', ['user' => $user])
-				->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->params['supportName']])
-				->setTo($this->email)
-				->setSubject(\Yii::t('app','Сброс пароля для {user}',['user'=> \Yii::$app->name]))
-				->send();
-		}
+        $user->generatePasswordResetToken();
+        if ($user->save()) {
+            return \Yii::$app->mail->compose('passwordResetToken', ['user' => $user])
+                ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->params['supportName']])
+                ->setTo($this->email)
+                ->setSubject(\Yii::t('app', 'Password reset for user {user}', ['user' => $user->name]))
+                ->send();
+        }
 
-		return false;
-	}
+        return false;
+    }
 }
  

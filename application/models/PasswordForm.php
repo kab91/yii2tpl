@@ -34,8 +34,8 @@ class PasswordForm extends Model
     public function attributeLabels()
     {
         return array(
-            'password' => Yii::t('app','Текущий пароль'),
-            'newpassword' => Yii::t('app','Новый пароль'),
+            'password' => Yii::t('app','Current password'),
+            'newpassword' => Yii::t('app','New password'),
         );
     }
 
@@ -47,7 +47,7 @@ class PasswordForm extends Model
     {
         $user = Yii::$app->user->getIdentity();
         if (!$user || !$user->validatePassword($this->password)) {
-            $this->addError('password', Yii::t('app','Неправильный текущений пароль.'));
+            $this->addError('password', Yii::t('app','Wrong current password'));
         }
     }
 

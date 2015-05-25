@@ -1,12 +1,41 @@
-<div class="admin-default-index">
-	<h1><?= $this->context->action->uniqueId ?></h1>
-	<p>
-		This is the view content for action "<?= $this->context->action->id ?>".
-		The action belongs to the controller "<?= get_class($this->context) ?>"
-		in the "<?= $this->context->module->id ?>" module.
-	</p>
-	<p>
-		You may customize this page by editing the following file:<br>
-		<code><?= __FILE__ ?></code>
-	</p>
+<?php
+use yii\helpers\Html;
+use yii\helpers\Url;
+
+?>
+
+<div class="row">
+    <div class="col-xs-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?= Yii::t('app', 'Manage Categories') ?></h3>
+            </div>
+            <div class="panel-body">
+                <div class="text-center">
+                    <p><?= Yii::t('app', 'Create, update, delete categories') ?></p>
+                    <?= Html::a(Yii::t('app', 'Manage'), Url::to(['/admin/category']), ['class' => 'btn btn-success']) ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?= Yii::t('app', 'Manage Pages') ?></h3>
+            </div>
+            <div class="panel-body">
+                <div class="text-center">
+                    <p><?= Yii::t('app', 'Create, update, delete pages') ?></p>
+                    <?= Html::a(Yii::t('app', 'Manage'), Url::to(['/admin/page']), ['class' => 'btn btn-success']) ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3">
+
+    </div>
+    <div class="col-xs-3">
+
+    </div>
 </div>
+

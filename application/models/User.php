@@ -26,7 +26,7 @@ use app\models\Status;
  * @property integer $updated_at
  * @property string $password write-only password
  *
- * @property Status $status 
+ * @property Status $status
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -42,7 +42,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return '{{%user}}';
     }
-     
+
     /**
      * @inheritdoc
      */
@@ -50,10 +50,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'idstatus' => Yii::t('app','Статус'),
-            'name' => Yii::t('app','Имя'),
-            'created_at' => Yii::t('app','Создан'),
-            'updated_at' => Yii::t('app','Обновлен'),
+            'idstatus' => Yii::t('app', 'Status'),
+            'name' => Yii::t('app', 'Name'),
+            'created_at' => Yii::t('app', 'Created'),
+            'updated_at' => Yii::t('app', 'Updated'),
         ];
     }
 
@@ -88,7 +88,8 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    public function getStatus() {
+    public function getStatus()
+    {
         return $this->hasOne(Status::className(), ['id' => 'idstatus']);
     }
 
@@ -96,7 +97,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $password = Yii::$app->getSecurity()->generateRandomString(10);
         $email = $attributes['email'];
-        list($name, ) = explode('@',$email);
+        list($name,) = explode('@', $email);
 
         /** @var User $user */
         $user = new static();
@@ -106,10 +107,10 @@ class User extends ActiveRecord implements IdentityInterface
         $user->generateAuthKey();
 
         if ($user->save()) {
-            Yii::$app->mail->compose('signup', ['user' => $user, 'password'=>$password])
+            Yii::$app->mail->compose('signup', ['user' => $user, 'password' => $password])
                 ->setTo($email)
                 ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->params['supportName']])
-                ->setSubject('Регистрация на '.Yii::$app->name)
+                ->setSubject('Регистрация на ' . Yii::$app->name)
                 ->send();
 
             return $user;
@@ -118,7 +119,8 @@ class User extends ActiveRecord implements IdentityInterface
         }
     }
 
-    public function changePassword($newpassword) {
+    public function changePassword($newpassword)
+    {
         $this->setPassword($newpassword);
         $this->generateAuthKey();
         $this->save(false);
@@ -163,7 +165,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public static function findIdentityByAccessToken($token, $type=null)
+    public static function findIdentityByAccessToken($token, $type = null)
     {
         throw new BadRequestHttpException('not implemented yet');
     }
@@ -176,7 +178,7 @@ class User extends ActiveRecord implements IdentityInterface
      * @param $type
      * @return self
      */
-    public static function findByPasswordResetToken($token, $type=null)
+    public static function findByPasswordResetToken($token, $type = null)
     {
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         $parts = explode('_', $token);

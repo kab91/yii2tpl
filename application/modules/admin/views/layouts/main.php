@@ -27,7 +27,7 @@ AdminAsset::register($this);
 	<div class="wrap">
 		<?php
 			NavBar::begin([
-				'brandLabel' => 'Панель управления',
+				'brandLabel' => Yii::t('app', 'Control Panel'),
 				'brandUrl' => Yii::$app->homeUrl,
 				'options' => [
 					'class' => 'navbar-inverse navbar-fixed-top',
@@ -36,9 +36,9 @@ AdminAsset::register($this);
 			echo Nav::widget([
 				'options' => ['class' => 'navbar-nav'],
 				'items' => [
-					['label' => 'Рубрики', 'url' => ['/admin/category']],
-					['label' => 'Странички', 'url' => ['/admin/page']],
-					['label' => 'На сайт', 'url' => ['/']],
+					['label' => Yii::t('app', 'Categories'), 'url' => ['/admin/category']],
+					['label' => Yii::t('app', 'Pages'), 'url' => ['/admin/page']],
+					['label' => Yii::t('app', 'Back to website'), 'url' => ['/']],
 					Yii::$app->user->isGuest ?
 						['label' => 'Login', 'url' => ['/site/login']] :
 						['label' => 'Logout (' . Yii::$app->user->identity->name . ')' ,
