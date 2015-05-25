@@ -36,29 +36,29 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'name',
                 'format' => 'raw',
                 'value' => function ($model, $index, $widget) {
-                        return '<span style="display:inline-block;width:'.(($model->level-1)*20).'px"></span>'.(Html::encode($model->name));
+                        return '<span style="display:inline-block;width:'.(($model->level)*20).'px"></span>'.(Html::encode($model->name));
                     },
             ],
 
             [
                 'class' => \yii\grid\ActionColumn::className(),
-                'template' => '{up} {down} {create} {view} {update}',
+                'template' => '{up} {down} {create} {view} {update} {delete}',
                 'buttons' => [
                     'create' => function ($url, $model) {
                             return Html::a('<span class="glyphicon glyphicon-plus"></span>', $url, [
-                                'title' => 'Добавить потомка',
+                                'title' => Yii::t('app', 'Add child'),
                             ]);
                         },
                     'up' => function ($url, $model) {
                             return Html::a('<span class="glyphicon glyphicon-arrow-up"></span>', $url, [
-                                'title' => 'Сдвинуть наверх',
+                                'title' => Yii::t('app', 'Move up'),
                             ]);
                         },
                     'down' => function ($url, $model) {
-                            return Html::a('<span class="glyphicon glyphicon-arrow-down"></span>', $url, [
-                                'title' => 'Сдвинуть вниз',
-                            ]);
-                        },
+                        return Html::a('<span class="glyphicon glyphicon-arrow-down"></span>', $url, [
+                            'title' => Yii::t('app', 'Move down'),
+                        ]);
+                    },
                 ]
             ],
 		],

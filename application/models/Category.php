@@ -2,7 +2,7 @@
 
 namespace app\models;
 use yii\db\ActiveRecord;
-use creocoder\behaviors\NestedSet;
+use creocoder\nestedsets\NestedSetsBehavior;
 use app\models\queries\CategoryQuery;
 
 /**
@@ -21,6 +21,12 @@ class Category extends ActiveRecord
 		return '{{%category}}';
 	}
 
+    public function init()
+    {
+        parent::init();
+        $this->depthAttribute = 'level';
+    }
+
 	/**
 	 * @inheritdoc
 	 */
@@ -38,7 +44,7 @@ class Category extends ActiveRecord
     public function behaviors() {
         return [
             [
-                'class' => NestedSet::className(),
+                'class' => NestedSetsBehavior::className(),
             ],
         ];
     }

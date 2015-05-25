@@ -90,7 +90,7 @@ class CategoryController extends AdminController
         $prev = $curr->prev()->one();
 
         if($prev)
-            $curr->moveBefore($prev);
+            $curr->insertBefore($prev);
 
     	return $this->redirect(['index']);
 	}
@@ -101,7 +101,7 @@ class CategoryController extends AdminController
         $next = $curr->next()->one();
 
         if($next)
-            $curr->moveAfter($next);
+            $curr->insertAfter($next);
 
     	return $this->redirect(['index']);
 	}
@@ -116,7 +116,7 @@ class CategoryController extends AdminController
 	{
 		$model = $this->findModel($id);
 
-		if ($model->load(Yii::$app->request->post()) && $model->saveNode()) {
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['index', 'id' => $model->id]);
 		} else {
 			return $this->render('update', [

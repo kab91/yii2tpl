@@ -2,7 +2,7 @@
 
 namespace app\models\queries;
 use yii\db\ActiveQuery;
-use creocoder\behaviors\NestedSetQuery;
+use creocoder\nestedsets\NestedSetsQueryBehavior;
 
 class CategoryQuery extends ActiveQuery
 {
@@ -10,7 +10,7 @@ class CategoryQuery extends ActiveQuery
     {
         return [
             [
-                'class' => NestedSetQuery::className(),
+                'class' => NestedSetsQueryBehavior::className(),
             ],
         ];
     }
