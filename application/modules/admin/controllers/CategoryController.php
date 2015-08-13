@@ -6,6 +6,7 @@ use app\modules\admin\components\AdminController;
 use Yii;
 use app\models\Category;
 use app\models\search\CategorySearch;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -17,24 +18,14 @@ class CategoryController extends AdminController
 {
 	public function behaviors()
 	{
-		return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['admin'],
-                    ],
-                ],
-            ],
-
+		return ArrayHelper::merge(parent::behaviors(), [
 			'verbs' => [
 				'class' => VerbFilter::className(),
 				'actions' => [
 					'delete' => ['post'],
 				],
 			],
-		];
+		]);
 	}
 
 	/**

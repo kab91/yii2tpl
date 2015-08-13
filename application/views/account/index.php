@@ -22,7 +22,7 @@ $this->title = Yii::t('app', 'Account');
             <?php endif ?>
 
             <?php if ($user->email): ?>
-                <p><?= Yii::t('app', 'E-mail') ?>:
+                <p><?= Yii::t('app', 'Email') ?>:
                     <a href="mailto:<?php echo Html::encode($user->email) ?>"><?php echo Html::encode($user->email) ?></a>
                 </p>
             <?php endif ?>

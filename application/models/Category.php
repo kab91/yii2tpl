@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use Yii;
 use yii\db\ActiveRecord;
 use creocoder\nestedsets\NestedSetsBehavior;
 use app\models\queries\CategoryQuery;
@@ -65,7 +66,7 @@ class Category extends ActiveRecord
 	{
 		return [
 			'id' => 'ID',
-			'name' => 'Name',
+			'name' => Yii::t('app', 'Name'),
 		];
 	}
 

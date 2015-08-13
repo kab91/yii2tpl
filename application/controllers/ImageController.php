@@ -110,7 +110,7 @@ class ImageController extends Controller
             ));
         } else {
             echo Json::encode(array(
-                'error' => 'неверный тип изображения'
+                'error' => Yii::t('app', 'Wrong image type')
             ));
         }
     }

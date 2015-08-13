@@ -43,7 +43,7 @@ class Image extends ActiveRecord
 
     public function checkMimeType($attribute, $params) {
         if (!in_array($this->{$attribute}, self::$allowedMimes))
-            $this->addError($attribute, 'Неподдерживаемый тип изображения');
+            $this->addError($attribute, Yii::t('app', 'Unsupported image type'));
     }
 
 	/**
@@ -53,12 +53,12 @@ class Image extends ActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Название',
-			'author' => 'Автор',
-			'filesize' => 'Размер',
-			'mimetype' => 'Mime-тип',
-			'revision' => 'Версия',
-			'created_at' => 'Дата создания',
+			'name' => Yii::t('app', 'Name'),
+			'author' => Yii::t('app', 'Author'),
+			'filesize' => Yii::t('app', 'Size'),
+			'mimetype' => Yii::t('app', 'Mime-type'),
+			'revision' => Yii::t('app', 'Version'),
+			'created_at' => Yii::t('app', 'Created At'),
 		);
 	}
 
@@ -209,7 +209,7 @@ class Image extends ActiveRecord
             $image_small_y = $image_small_x * $image_y / $image_x;
         }
 
-        if (isset($params['crop'])) { //кропнем кватрат по центру
+        if (isset($params['crop'])) { // crop square by center
             if ($image_x > $image_y) {
                 $crop_size = $image_y;
             } else {

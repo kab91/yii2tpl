@@ -110,7 +110,7 @@ class User extends ActiveRecord implements IdentityInterface
             Yii::$app->mail->compose('signup', ['user' => $user, 'password' => $password])
                 ->setTo($email)
                 ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->params['supportName']])
-                ->setSubject('Регистрация на ' . Yii::$app->name)
+                ->setSubject(Yii::t('app', 'Registration on {appname}', ['appname' => Yii::$app->name]))
                 ->send();
 
             return $user;

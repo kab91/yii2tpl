@@ -23,6 +23,12 @@ class Utils {
         return $dir;
     }
 
+    /**
+     * Get slug by russian title
+     * @param $st
+     * @param string $delim
+     * @return mixed|string
+     */
     public static function getSlug($st, $delim = '_') {
 
          $st = mb_strtolower($st, 'utf-8');
@@ -38,17 +44,14 @@ class Utils {
          'j','i','e','_','zh','ts','ch','sh','shch', '','yu','ya'
          ), $st);
 
-        //оставим в урле только латинские буквы и цифры
         $st = preg_replace('/[^a-z0-9_]/', '', $st);
         $st = trim($st, '_');
 
-        //удалим предлоги и прочие единичные символы
         do {
             $prev_st = $st;
             $st = preg_replace('/_[a-z0-9]_/', '_', $st);
         } while ($st != $prev_st);
 
-        //два и более подчеркиваний заменим одним
         $st = preg_replace('/_{2,}/', '_', $st);
 
         if ($delim != '_') {

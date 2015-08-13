@@ -2,6 +2,7 @@
 
 namespace app\models;
 use yii\helpers\HtmlPurifier;
+use Yii;
 
 /**
  * This is the model class for table "x_page".
@@ -42,9 +43,9 @@ class Page extends \yii\db\ActiveRecord
 	{
 		return [
 			'id' => 'ID',
-			'slug' => 'Slug',
-			'title' => 'Title',
-			'content' => 'Content',
+			'slug' => Yii::t('app', 'Slug'),
+			'title' => Yii::t('app', 'Title'),
+			'content' => Yii::t('app', 'Content'),
 		];
 	}
 }

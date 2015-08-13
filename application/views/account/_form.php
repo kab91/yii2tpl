@@ -11,7 +11,7 @@ $form = ActiveForm::begin([
     ],
 ]); ?>
 
-<?php echo $form->field($model, 'email')->label(Yii::t('app', 'E-mail')) ?>
+<?php echo $form->field($model, 'email')->label(Yii::t('app', 'Email')) ?>
 <?php echo $form->field($model, 'name')->label(Yii::t('app', 'Name')) ?>
 <?php echo $form->field($model, 'site')->label(Yii::t('app', 'Website')) ?>
 

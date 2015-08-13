@@ -21,7 +21,8 @@ class SignupForm extends Model
             ['email', 'required'],
             ['email', 'filter', 'filter' => 'trim'],
 			['email', 'email'],
-			['email', 'unique', 'targetClass' => '\app\models\User', 'message' => Yii::t('app','Адрес уже используется другим пользователем.')],
+			['email', 'unique', 'targetClass' => '\app\models\User',
+                'message' => Yii::t('app','Email already in use by another user.')],
 		];
 	}
 
