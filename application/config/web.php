@@ -96,7 +96,7 @@ return [
     'params' => [
         'domain' => 'example.com',
         'staticUrl' => '',
-        'socialLoginEnabled' => true,
+        'socialLoginEnabled' => false,
         'images' => [
             //'secret' => 'dfr467623rfgt6u32rsd',
             'storagePath' => __DIR__ . '/../data/storage',

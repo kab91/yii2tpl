@@ -33,8 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'style' => 'width: 50px'
                 ]
             ],
-
-            'slug',
+			[
+                'attribute' => 'slug',
+                'format' => 'html',
+                'value' => function ($data) {
+                    return Html::a($data->slug, $data->getUrl());
+                }
+            ],
 			'title',
 
 			['class' => 'yii\grid\ActionColumn'],

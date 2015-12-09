@@ -39,11 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <span style="font-size: 14pt; padding:30px 30px 0 45px;color: #666"><?= Yii::t('app', 'or') ?></span>
             </div>
             <div class="col-lg-5">
-                <script src="http://loginza.ru/js/widget.js" type="text/javascript"></script>
-                <iframe
-                    src="http://loginza.ru/api/widget?overlay=loginza&amp;providers_set=vkontakte,facebook,google,twitter,mailruapi,odnoklassniki,rambler,livejournal,openid&amp;token_url=<?php echo urlencode('http://' . \Yii::$app->params['domain'] . '/account/auth?token=' . \Yii::$app->request->csrfToken) ?>"
-                    style="width:359px;height:170px;margin-top: -20px" scrolling="no" frameborder="no"></iframe>
-
+                Social auth...
             </div>
         <?php endif ?>
     </div>

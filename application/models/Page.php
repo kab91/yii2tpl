@@ -31,7 +31,7 @@ class Page extends \yii\db\ActiveRecord
 			[['slug', 'title', 'content'], 'required'],
 			[['content'], 'string'],
             [['content'],'filter','filter'=>[new HtmlPurifier(),'process']],
-			[['slug', 'title'], 'string', 'max' => 255],
+			[['slug', 'title', 'seo_keywords', 'seo_description'], 'string', 'max' => 255],
 			[['slug'], 'unique']
 		];
 	}
@@ -46,6 +46,12 @@ class Page extends \yii\db\ActiveRecord
 			'slug' => Yii::t('app', 'Slug'),
 			'title' => Yii::t('app', 'Title'),
 			'content' => Yii::t('app', 'Content'),
+			'seo_keywords' => 'SEO keywords',
+            'seo_description' => 'SEO description',
 		];
 	}
+
+    public function getUrl() {
+        return Yii::$app->request->baseUrl . '/page/' . $this->slug;
+    }
 }

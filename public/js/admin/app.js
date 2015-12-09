@@ -5,7 +5,6 @@ var admin = {
         $a.attr("href", link.replace("large","full"));
         $a.attr("class", "zoom");
         image.wrap($a);
-        this.sync();
     },
 
     imageUploadError: function(json) {
