@@ -37,8 +37,8 @@ $config = require($dir . '/config/web.php');
 
 if('prod'!=YII_ENV) {
     $config = ArrayHelper::merge($config, $configEnv);
-} else {
+} /*else {
     $config['components']['assetManager']['bundles'] = require($dir . '/assets/CompressedConfig.php');
-}
+}*/
 
 (new yii\web\Application($config))->run();

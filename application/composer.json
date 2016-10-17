@@ -8,11 +8,14 @@
         "creocoder/yii2-nested-sets": "dev-master",
         "kartik-v/yii2-widgets": "dev-master",
         "kartik-v/yii2-password": "dev-master",
-        "vova07/yii2-imperavi-widget": "*"
+        "vova07/yii2-imperavi-widget": "*",
+        "yiisoft/yii2-composer": "~2.0.4",
+        "fxp/composer-asset-plugin": "^1.2",
+        "skeeks/yii2-assets-auto-compress": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "*",
-        "yiisoft/yii2-gii": "*"
+        "yiisoft/yii2-gii": "dev-master"
     },
     "scripts": {
         "post-create-project-cmd": [

@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+$this->title = 'Dashboard';
 ?>
 
 <div class="row">
@@ -32,7 +33,17 @@ use yii\helpers\Url;
         </div>
     </div>
     <div class="col-xs-3">
-
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?= Yii::t('app', 'Manage Users') ?></h3>
+            </div>
+            <div class="panel-body">
+                <div class="text-center">
+                    <p><?= Yii::t('app', 'Create, update, delete users') ?></p>
+                    <?= Html::a(Yii::t('app', 'Manage'), Url::to(['/admin/user']), ['class' => 'btn btn-success']) ?>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-xs-3">
 

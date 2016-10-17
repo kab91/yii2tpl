@@ -6,27 +6,24 @@ use yii\db\ActiveRecord;
 use yii\web\BadRequestHttpException;
 use yii\web\IdentityInterface;
 use yii\behaviors\TimestampBehavior;
-use app\models\Status;
+use yii\helpers\ArrayHelper;
 
 /**
- * User model
+ * This is the model class for table "x_user".
  *
  * @property integer $id
+ * @property integer $idstatus
+ * @property integer $idavatar
  * @property string $name
- * @property string $email
- *
  * @property string $auth_key
  * @property string $password_hash
  * @property string $password_reset_token
- *
- * @property integer $idavatar
- * @property integer $idstatus
- *
+ * @property string $email
  * @property integer $created_at
  * @property integer $updated_at
- * @property string $password write-only password
+ * @property string $identity
+ * @property string $site
  *
- * @property Status $status
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -54,6 +51,7 @@ class User extends ActiveRecord implements IdentityInterface
             'name' => Yii::t('app', 'Name'),
             'created_at' => Yii::t('app', 'Created'),
             'updated_at' => Yii::t('app', 'Updated'),
+            'email' => 'Email',
         ];
     }
 
@@ -63,7 +61,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            TimestampBehavior::className()
         ];
     }
 
@@ -73,17 +71,12 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['name', 'filter', 'filter' => 'trim'],
-            ['name', 'required'],
-            ['name', 'string', 'min' => 2, 'max' => 255],
-
-            ['email', 'filter', 'filter' => 'trim'],
-            ['email', 'required'],
-            ['email', 'email'],
-            ['email', 'unique'],
-
-            ['site', 'url'],
-
+            [['idstatus', 'idavatar',], 'integer'],
+            [['name', 'auth_key', 'password_hash'], 'required'],
+            [['name', 'email', 'identity', 'site'], 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 32],
+            [['password_hash'], 'string', 'max' => 100],
+            [['password_reset_token'], 'string', 'max' => 50],
             ['avatar', 'safe'],
         ];
     }
@@ -91,6 +84,17 @@ class User extends ActiveRecord implements IdentityInterface
     public function getStatus()
     {
         return $this->hasOne(Status::className(), ['id' => 'idstatus']);
+    }
+
+    public function getRoles()
+    {
+        return $this->hasMany(AuthItem::className(), ['name' => 'item_name'])->viaTable('x_auth_assignment',
+            ['user_id' => 'id']);
+    }
+
+    public function getRolesStr()
+    {
+        return implode(ArrayHelper::map($this->roles, 'name', 'name'), ',');
     }
 
     public static function create($attributes)
@@ -130,6 +134,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $url = Yii::$app->user->getReturnUrl();
         return $url;
+    }
+
+    public function getUrl()
+    {
+        return Yii::$app->request->baseUrl . '/user/' . $this->id;
     }
 
     /**
@@ -268,5 +277,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function fromSocial()
     {
         return !empty($this->identity);
+    }
+
+    public static function getRolesList()
+    {
+        return ArrayHelper::map(AuthItem::find()->where('type = 2')->all(), 'name', 'name');
     }
 }

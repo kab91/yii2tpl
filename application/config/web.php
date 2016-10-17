@@ -14,7 +14,12 @@ return [
             'class' => 'app\modules\admin\Module',
         ],
     ],
+    'bootstrap' => ['assetsAutoCompress'],
     'components' => [
+        'assetsAutoCompress' => [
+            'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
+            'enabled' => true,
+        ],
         'request' => [
             'cookieValidationKey' => '6YE1aewrw@345345ABm5Z&it@',
         ],

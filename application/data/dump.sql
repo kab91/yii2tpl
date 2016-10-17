@@ -6,7 +6,7 @@
 CREATE TABLE IF NOT EXISTS `x_auth_assignment` (
   `item_name` varchar(64) NOT NULL,
   `user_id` varchar(64) NOT NULL,
-  `created_at` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`item_name`,`user_id`),
   CONSTRAINT `x_auth_assignment_ibfk_1` FOREIGN KEY (`item_name`) REFERENCES `x_auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

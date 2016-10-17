@@ -106,8 +106,6 @@ class AccountController extends Controller
                     $user->save(false);
                 }
 
-                //BUG next line kill auth :(
-                //Yii::$app->getSession()->setFlash('Профиль успешно обновлен!');
                 $this->redirect('/account');
             }
         }
@@ -162,7 +160,7 @@ class AccountController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->getSession()->setFlash('success',
-                Yii::t('app', 'Password were sended to {email}. Please check your email (including spam box)', ['email' => $model->email]));
+                Yii::t('app', 'Password has been sent to {email}. Please check your email (including spam box)', ['email' => $model->email]));
             return $this->goHome();
         }
 
