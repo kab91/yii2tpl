@@ -1,4 +1,4 @@
-<?
+<?php
 
 namespace app\components;
 
@@ -7,7 +7,7 @@ use \yii\web\Cookie;
 
 class LanguageBehavior
 {
-    static  function handleLanguageBehavior()
+    static function handleLanguageBehavior()
     {
         $app = Yii::$app;
         $preferredLanguage = $app->request->getPreferredLanguage();
