@@ -14,7 +14,7 @@ return [
             'class' => 'app\modules\admin\Module',
         ],
     ],
-    'bootstrap' => ['assetsAutoCompress'],
+    'bootstrap' => ['log', 'assetsAutoCompress'],
     'components' => [
         'assetsAutoCompress' => [
             'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
@@ -55,7 +55,7 @@ return [
             'targets' => [
                 'file' => [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error'],
+                    'levels' => ['error', 'warning'],
                 ],
             ],
         ],
