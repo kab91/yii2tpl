@@ -105,13 +105,13 @@ class ImageController extends Controller
         if ($uploadImage && in_array($uploadImage->type, Image::$allowedMimes)) {
             $id = Image::upload(null, $uploadImage);
 
-            echo Json::encode(array(
-                'filelink' => Image::url($id, array('size' => 'large'))
-            ));
+            echo Json::encode([
+                'filelink' => Image::url($id, ['size' => 'large'])
+            ]);
         } else {
-            echo Json::encode(array(
-                'error' => Yii::t('app', 'Wrong image type')
-            ));
+            echo Json::encode([
+                'error' => 'Wrong image type'
+            ]);
         }
     }
 }

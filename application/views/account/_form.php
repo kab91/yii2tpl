@@ -11,19 +11,19 @@ $form = ActiveForm::begin([
     ],
 ]); ?>
 
-<?php echo $form->field($model, 'email')->label(Yii::t('app', 'Email')) ?>
-<?php echo $form->field($model, 'name')->label(Yii::t('app', 'Name')) ?>
-<?php echo $form->field($model, 'site')->label(Yii::t('app', 'Website')) ?>
+<?= $form->field($model, 'email')->label('Email') ?>
+<?= $form->field($model, 'name')->label('Name') ?>
+<?= $form->field($model, 'site')->label('Website') ?>
 
 <?php if ($model->idavatar): ?>
     <div class="controls">
-        <img src="<?php echo Image::url($model->idavatar, '/size/xsmall', '/images/avatar-empty.png'); ?>"/>
+        <?= Html::img(Image::url($model->idavatar, '/size/xsmall', '/images/avatar-empty.png')) ?>
     </div>
 <?php endif ?>
-<?php echo $form->field($model, 'avatar')->fileInput()->hint(Yii::t('app', 'Max size') . ' 700k. JPG, GIF, PNG.')->label(Yii::t('app', 'Avatar')); ?>
+<?= $form->field($model, 'avatar')->fileInput()->hint('Max size 700k. JPG, GIF, PNG.')->label('Avatar'); ?>
 
 <div class="form-actions">
-    <?php echo Html::submitButton(Yii::t('app', 'Save'), ['class'=>'btn btn-primary']); ?>
+    <?= Html::submitButton('Save', ['class'=>'btn btn-primary']); ?>
 </div>
 
 <?php ActiveForm::end(); ?>

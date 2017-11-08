@@ -28,7 +28,7 @@ AdminAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::t('app', 'Control Panel'),
+        'brandLabel' => 'Dashboard',
         'brandUrl' => Url::to(['/admin']),
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -37,10 +37,10 @@ AdminAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => Yii::t('app', 'Categories'), 'url' => ['/admin/category']],
-            ['label' => Yii::t('app', 'Pages'), 'url' => ['/admin/page']],
-            ['label' => Yii::t('app', 'Users'), 'url' => ['/admin/user']],
-            ['label' => Yii::t('app', 'Back to website'), 'url' => Yii::$app->homeUrl],
+            ['label' => 'Categories', 'url' => ['/admin/category']],
+            ['label' => 'Pages', 'url' => ['/admin/page']],
+            ['label' => 'Users', 'url' => ['/admin/user']],
+            ['label' => 'Back to website', 'url' => Yii::$app->homeUrl],
             Yii::$app->user->isGuest ?
                 ['label' => 'Login', 'url' => ['/site/login']] :
                 [

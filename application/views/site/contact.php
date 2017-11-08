@@ -8,7 +8,7 @@ use yii\captcha\Captcha;
  * @var yii\widgets\ActiveForm $form
  * @var app\models\ContactForm $model
  */
-$this->title = Yii::t('app', 'Contact');
+$this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-contact">
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]) ?>
             <?php endif ?>
             <div class="form-group">
-                <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-primary']) ?>
+                <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

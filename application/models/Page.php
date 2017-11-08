@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use yii\helpers\HtmlPurifier;
 use Yii;
 
@@ -14,44 +15,45 @@ use Yii;
  */
 class Page extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return '{{%page}}';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%page}}';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['slug', 'title', 'content'], 'required'],
-			[['content'], 'string'],
-            [['content'],'filter','filter'=>[new HtmlPurifier(),'process']],
-			[['slug', 'title', 'seo_keywords', 'seo_description'], 'string', 'max' => 255],
-			[['slug'], 'unique']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['slug', 'title', 'content'], 'required'],
+            [['content'], 'string'],
+            [['content'], 'filter', 'filter' => [new HtmlPurifier(), 'process']],
+            [['slug', 'title', 'seo_keywords', 'seo_description'], 'string', 'max' => 255],
+            [['slug'], 'unique']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'slug' => Yii::t('app', 'Slug'),
-			'title' => Yii::t('app', 'Title'),
-			'content' => Yii::t('app', 'Content'),
-			'seo_keywords' => 'SEO keywords',
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'slug' => 'Slug',
+            'title' => 'Title',
+            'content' => 'Content',
+            'seo_keywords' => 'SEO keywords',
             'seo_description' => 'SEO description',
-		];
-	}
+        ];
+    }
 
-    public function getUrl() {
+    public function getUrl()
+    {
         return Yii::$app->request->baseUrl . '/page/' . $this->slug;
     }
 }

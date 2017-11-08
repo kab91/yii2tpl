@@ -82,8 +82,8 @@ class UserController extends AdminController
 
                 Yii::$app->mail->compose('signup', ['user' => $model, 'password' => $password])
                     ->setTo($model->email)
-                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->params['supportName']])
-                    ->setSubject('Sign up on Acgr Portal')
+                    ->setFrom(Yii::$app->params['supportEmail'], Yii::$app->params['supportName'])
+                    ->setSubject('Sign up in Application')
                     ->send();
 
                 return $this->redirect(['view', 'id' => $model->id]);

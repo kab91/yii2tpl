@@ -32,17 +32,17 @@ class Utils {
     public static function getSlug($st, $delim = '_') {
 
          $st = mb_strtolower($st, 'utf-8');
-         $st = str_replace(array(
+         $st = str_replace([
          '?','!','.',',',':',';','*','(',')','{','}','[',']','%','#','№','@','$','^','-','+','/','\\','=','|','"','\'',
          'а','б','в','г','д','е','ё','з','и','й','к',
          'л','м','н','о','п','р','с','т','у','ф','х',
          'ъ','ы','э',' ','ж','ц','ч','ш','щ','ь','ю','я'
-         ), array(
+         ], [
          '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_',
          'a','b','v','g','d','e','e','z','i','y','k',
          'l','m','n','o','p','r','s','t','u','f','h',
          'j','i','e','_','zh','ts','ch','sh','shch', '','yu','ya'
-         ), $st);
+         ], $st);
 
         $st = preg_replace('/[^a-z0-9_]/', '', $st);
         $st = trim($st, '_');
@@ -59,5 +59,24 @@ class Utils {
         }
 
         return $st;
+    }
+
+    public static function makeLabel($value, $inverse = false)
+    {
+        $answer = $value ? 'Yes' : 'No';
+        $dangerTpl = "<span class=\"label label-danger\">%s</span>";
+        $successTpl = "<span class=\"label label-success\">%s</span>";
+
+        if ($value) {
+            if ($inverse) {
+                return sprintf($dangerTpl, $answer);
+            }
+            return sprintf($successTpl, $answer);
+        } else {
+            if ($inverse) {
+                return sprintf($successTpl, $answer);
+            }
+            return sprintf($dangerTpl, $answer);
+        }
     }
 }

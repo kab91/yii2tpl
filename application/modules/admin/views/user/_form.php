@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\User;
-use app\models\UserType;
 use app\models\Image;
 
 /* @var $this yii\web\View */
@@ -25,10 +24,10 @@ use app\models\Image;
 
     <?php if ($model->idavatar): ?>
         <div class="controls">
-            <img src="<?= Image::url($model->idavatar, '/size/xsmall', '/i/avatar-empty.png'); ?>"/>
+            <?= Html::img(Image::url($model->idavatar, '/size/xsmall', '/i/avatar-empty.png')) ?>
         </div>
     <?php endif ?>
-    <?= $form->field($model, 'avatar')->fileInput()->label(Yii::t('app', 'Avatar')); ?>
+    <?= $form->field($model, 'avatar')->fileInput()->label('Avatar'); ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update',

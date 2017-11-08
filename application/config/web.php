@@ -48,7 +48,10 @@ return [
             'errorAction' => 'site/error',
         ],
         'mail' => [
-            'class' => 'yii\swiftmailer\Mailer',
+            'class' => 'yashop\ses\Mailer',
+            'access_key' => 'ACCESS_KEY',
+            'secret_key' => 'SECRET_KEY',
+            'host' => 'AWS_HOST',
         ],
         'log' => [
             'traceLevel' => 0,
@@ -56,20 +59,17 @@ return [
                 'file' => [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
+                    'except' => [
+                        'yii\web\HttpException:404',
+                    ],
+                    'logVars' => ['_GET', '_POST', '_SESSION', '_COOKIE'],
                 ],
             ],
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-
-                'page/<slug:\w+>' => 'page/view',
-                'image/<id:\d+>-<size:\w+>-<rev:\d+>.jpg' => 'image/get',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                '<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
-
-            ]
+            'rules' => require_once 'urls.php'
         ],
         'db' => [
             'class' => 'yii\db\Connection',
@@ -98,18 +98,5 @@ return [
             ],
         ],
     ],
-    'params' => [
-        'domain' => 'example.com',
-        'staticUrl' => '',
-        'socialLoginEnabled' => false,
-        'images' => [
-            //'secret' => 'dfr467623rfgt6u32rsd',
-            'storagePath' => __DIR__ . '/../data/storage',
-        ],
-        'fromEmail' => 'support@example.com',
-        'adminEmail' => 'admin@example.com',
-        'supportEmail' => 'admin@example.com',
-        'supportName' => 'example.com support',
-        'user.passwordResetTokenExpire' => 3600,
-    ],
+    'params' => require_once 'params.php'
 ];

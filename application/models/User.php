@@ -47,10 +47,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'idstatus' => Yii::t('app', 'Status'),
-            'name' => Yii::t('app', 'Name'),
-            'created_at' => Yii::t('app', 'Created'),
-            'updated_at' => Yii::t('app', 'Updated'),
+            'idstatus' => 'Status',
+            'name' => 'Name',
+            'created_at' => 'Created',
+            'updated_at' => 'Updated',
             'email' => 'Email',
         ];
     }
@@ -113,8 +113,8 @@ class User extends ActiveRecord implements IdentityInterface
         if ($user->save()) {
             Yii::$app->mail->compose('signup', ['user' => $user, 'password' => $password])
                 ->setTo($email)
-                ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->params['supportName']])
-                ->setSubject(Yii::t('app', 'Registration on {appname}', ['appname' => Yii::$app->name]))
+                ->setFrom(Yii::$app->params['supportEmail'], Yii::$app->params['supportName'])
+                ->setSubject('Sign up in Yii Application')
                 ->send();
 
             return $user;

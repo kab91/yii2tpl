@@ -24,7 +24,7 @@ class PasswordForm extends Model
             [['password', 'newpassword'], 'required'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
-            [['newpassword'], StrengthValidator::className(), 'preset'=>'normal','hasUser'=>false],
+            [['newpassword'], StrengthValidator::className(), 'preset' => 'normal', 'hasUser' => false],
         ];
     }
 
@@ -33,10 +33,10 @@ class PasswordForm extends Model
      */
     public function attributeLabels()
     {
-        return array(
-            'password' => Yii::t('app','Current password'),
-            'newpassword' => Yii::t('app','New password'),
-        );
+        return [
+            'password' => 'Current password',
+            'newpassword' => 'New password',
+        ];
     }
 
     /**
@@ -47,11 +47,12 @@ class PasswordForm extends Model
     {
         $user = Yii::$app->user->getIdentity();
         if (!$user || !$user->validatePassword($this->password)) {
-            $this->addError('password', Yii::t('app','Wrong current password'));
+            $this->addError('password', 'Wrong current password');
         }
     }
 
-    public function changePassword() {
+    public function changePassword()
+    {
         if ($this->validate()) {
             $user = Yii::$app->user->getIdentity();
             $user->changePassword($this->newpassword);

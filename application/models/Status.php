@@ -44,18 +44,14 @@ class Status extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'owner' => Yii::t('app', 'Owner'),
-            'css_class' => Yii::t('app', 'Css Class'),
-            'sortorder' => Yii::t('app', 'Sortorder'),
+            'id' => 'ID',
+            'name' => 'Name',
+            'owner' => 'Owner',
+            'css_class' => 'Css Class',
+            'sortorder' => 'Sort Order',
         ];
     }
 
-    /**
-     * Возвращает строку со статусом
-     * @return string строка со статусом
-     */
     public function getStr() {
         return '<span class="status '.$this->css_class.'">'.$this->name.'</span>';
     }

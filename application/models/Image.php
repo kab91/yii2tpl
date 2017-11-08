@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use Yii;
 use yii\db\ActiveRecord;
 use app\components\Utils;
@@ -26,7 +27,7 @@ class Image extends ActiveRecord
     const CACHE_TTL = 2678400;
 
     const defaultWidth = 100;
-    static $allowedMimes = array('image/jpeg','image/pjpeg', 'image/jpg', 'image/gif','image/png');
+    static $allowedMimes = ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/gif', 'image/png'];
     static $sizes = [
         'small' => 100,
         'large' => 480,
@@ -41,34 +42,38 @@ class Image extends ActiveRecord
         return '{{%image}}';
     }
 
-    public function checkMimeType($attribute, $params) {
-        if (!in_array($this->{$attribute}, self::$allowedMimes))
-            $this->addError($attribute, Yii::t('app', 'Unsupported image type'));
+    public function checkMimeType($attribute, $params)
+    {
+        if (!in_array($this->{$attribute}, self::$allowedMimes)) {
+            $this->addError($attribute, 'Unsupported image type');
+        }
     }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id' => 'ID',
-			'name' => Yii::t('app', 'Name'),
-			'author' => Yii::t('app', 'Author'),
-			'filesize' => Yii::t('app', 'Size'),
-			'mimetype' => Yii::t('app', 'Mime-type'),
-			'revision' => Yii::t('app', 'Version'),
-			'created_at' => Yii::t('app', 'Created At'),
-		);
-	}
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'name' => 'Name',
+            'author' => 'Author',
+            'filesize' => 'Size',
+            'mimetype' => 'Mime-type',
+            'revision' => 'Version',
+            'created_at' => 'Created At',
+        ];
+    }
 
-    public function getFileName() {
-		$levelsDir = Utils::getLevelsDirABC(Yii::$app->params['images']['storagePath'].'/images', $this->id);
-		return $levelsDir.'/'.$this->id;
-	}
+    public function getFileName()
+    {
+        $levelsDir = Utils::getLevelsDirABC(Yii::$app->params['images']['storagePath'] . '/images', $this->id);
+        return $levelsDir . '/' . $this->id;
+    }
 
-    public function beforeDelete() {
-        if(parent::beforeDelete()) {
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
             @unlink($this->getFileName());
         }
         return true;
@@ -76,24 +81,25 @@ class Image extends ActiveRecord
 
     public function beforeSave($insert)
     {
-        if(parent::beforeSave($insert))
-        {
-            if($this->isNewRecord)
-            {
-                $this->created_at=date('Y-m-d H:i:s');
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->created_at = date('Y-m-d H:i:s');
             } else {
-                $this->updated_at=date('Y-m-d H:i:s');
+                $this->updated_at = date('Y-m-d H:i:s');
             }
 
             return true;
-        }
-        else
+        } else {
             return false;
+        }
     }
 
-    public static function upload($id, $file, $name = null) {
+    public static function upload($id, $file, $name = null)
+    {
 
-        if (!$file) return null;
+        if (!$file) {
+            return null;
+        }
 
         $model = null !== $id ? Image::findOne($id) : null;
 
@@ -113,7 +119,7 @@ class Image extends ActiveRecord
         }
 
         $model->revision++;
-        if($model->save()) {
+        if ($model->save()) {
             if ($file instanceof UploadedFile) {
                 $file->saveAs($model->getFileName());
             } else {
@@ -133,7 +139,8 @@ class Image extends ActiveRecord
         if (isset($params['rev'])) {
             $rev = $params['rev'];
         } else {
-            $img = Image::findOne($id); /* @var $img Image */
+            $img = Image::findOne($id);
+            /* @var $img Image */
             $rev = $img->revision;
         }
 
@@ -147,26 +154,29 @@ class Image extends ActiveRecord
 
         $url .= '-' . $size . '-' . $rev . '.jpg';
 
-        if (isset(Yii::$app->params['images']['secret']))
+        if (isset(Yii::$app->params['images']['secret'])) {
             $url .= '?k=' . self::getKey($url);
+        }
 
         return $url;
     }
 
-    static public function getKey($url) {
+    static public function getKey($url)
+    {
         return hash_hmac('md5', $url, Yii::$app->params['images']['secret']);
     }
 
-    public function getWidth($size) {
+    public function getWidth($size)
+    {
 
-        if(isset(Image::$sizes[$size])) {
+        if (isset(Image::$sizes[$size])) {
             return Image::$sizes[$size];
         }
 
         return static::defaultWidth;
     }
 
-    public function resize($params=array())
+    public function resize($params = array())
     {
         if (isset($params['size'])) {
             $width = $this->getWidth($params['size']);
@@ -225,7 +235,8 @@ class Image extends ActiveRecord
             imagecopy($im_croped, $im, 0, 0, $tlx, $tly, $crop_size, $crop_size);
             $im_new = ImageCreateTrueColor($width, $width);
             $this->_saveAlpha($im_new);
-            imagecopyresampled($im_new, $im_croped, 0, 0, 0, 0, $width, $width, imagesx($im_croped), imagesy($im_croped));
+            imagecopyresampled($im_new, $im_croped, 0, 0, 0, 0, $width, $width, imagesx($im_croped),
+                imagesy($im_croped));
         } else {
             $im_new = ImageCreateTrueColor($image_small_x, $image_small_y);
             $this->_saveAlpha($im_new);
@@ -244,7 +255,7 @@ class Image extends ActiveRecord
 
         ob_end_clean();
 
-        return array('image' => $final_image, 'content_type' => $content_type);
+        return ['image' => $final_image, 'content_type' => $content_type];
     }
 
     private function _saveAlpha($img)
@@ -255,7 +266,8 @@ class Image extends ActiveRecord
         imagefill($img, 0, 0, $transparent);
     }
 
-    private function _watermark($im_new, $x, $y) {
+    private function _watermark($im_new, $x, $y)
+    {
         $text = 'xxx';
         $marge_right = 0;
         $marge_bottom = 10;

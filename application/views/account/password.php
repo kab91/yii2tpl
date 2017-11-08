@@ -8,7 +8,7 @@ use kartik\password\PasswordInput;
  * @var yii\widgets\ActiveForm $form
  * @var app\models\User $model
  */
-$this->title = Yii::t('app', 'Change Password');
+$this->title = 'Change Password';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-reset-password">
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'password')->passwordInput() ?>
             <?= $form->field($model, 'newpassword')->widget(PasswordInput::classname()) ?>
             <div class="form-group">
-                <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-primary']) ?>
+                <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

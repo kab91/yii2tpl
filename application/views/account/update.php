@@ -2,10 +2,10 @@
 /**
  * @var yii\web\View $this
  */
-$this->title = Yii::t('app', 'Account Edit');
+$this->title = 'Account Edit';
 ?>
 
 <fieldset>
-    <legend><?= Yii::t('app', 'Account Edit') ?></legend>
-    <?php echo $this->render('_form', ['model'=>$model,]); ?>
+    <legend><?= $this->title ?></legend>
+    <?= $this->render('_form', ['model'=>$model,]); ?>
 </fieldset>

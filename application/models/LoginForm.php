@@ -38,11 +38,11 @@ class LoginForm extends Model
      */
     public function attributeLabels()
     {
-        return array(
+        return [
             'email' => 'Email',
-            'password' => Yii::t('app','Password'),
-            'rememberMe' => Yii::t('app','Remember me'),
-        );
+            'password' => 'Password',
+            'rememberMe' => 'Remember me',
+        ];
     }
 
     /**
@@ -53,7 +53,7 @@ class LoginForm extends Model
     {
         $user = $this->getUser();
         if (!$user || !$user->validatePassword($this->password)) {
-            $this->addError('password', Yii::t('app', 'Wrong email or password.'));
+            $this->addError('password', 'Wrong email or password.');
         }
     }
 

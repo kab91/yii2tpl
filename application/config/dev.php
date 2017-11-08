@@ -5,6 +5,10 @@ defined('YII_DEBUG') or define('YII_DEBUG', true);
 return [
     'bootstrap' => ['debug'],
     'components' => [
+        'assetsAutoCompress' => [
+            'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
+            'enabled' => false,
+        ],
         'db' => [
             'dsn' => 'mysql:host=localhost;dbname=yii2tpl',
             'username' => 'root',
@@ -18,9 +22,6 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
-        ],
-        'mail' => [
-            'useFileTransport' => true,
         ],
     ],
     'modules' => [

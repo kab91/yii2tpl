@@ -88,7 +88,7 @@ class AccountController extends Controller
         }
 
         if ($error) {
-            Yii::$app->getSession()->setFlash(Yii::t('app', 'Authorization failed'));
+            Yii::$app->getSession()->setFlash('Authorization failed');
             $this->redirect('/account/login');
         }
     }
@@ -110,9 +110,9 @@ class AccountController extends Controller
             }
         }
 
-        return $this->render('update', array(
+        return $this->render('update', [
             'model' => $user,
-        ));
+        ]);
     }
 
     public function actionIndex()
@@ -160,8 +160,8 @@ class AccountController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->getSession()->setFlash('success',
-                Yii::t('app', 'Password has been sent to {email}. Please check your email (including spam box)', ['email' => $model->email]));
-            return $this->goHome();
+                sprintf("Password has been sent to %s. Please check your email (including spam box).", $model->email));
+            return $this->redirect('/account/login');
         }
 
         return $this->render('signup', [
@@ -174,11 +174,11 @@ class AccountController extends Controller
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Check your email for further instructions.'));
+                Yii::$app->getSession()->setFlash('success', 'Check your email for further instructions.');
             } else {
-                Yii::$app->getSession()->setFlash('error', Yii::t('app', 'Sorry, we are unable to reset password for email provided.'));
+                Yii::$app->getSession()->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
             }
-            return $this->goHome();
+            return $this->redirect('/account/login');
         }
 
         return $this->render('requestPasswordResetToken', [
@@ -195,8 +195,8 @@ class AccountController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'New password was saved.'));
-            return $this->goHome();
+            Yii::$app->getSession()->setFlash('success', 'New password was saved.');
+            return $this->redirect('/account/login');
         }
 
         return $this->render('resetPassword', [

@@ -40,19 +40,19 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index'], 'visible' => Yii::$app->controller->action->getUniqueId() !== 'site/index'],
-            ['label' => Yii::t('app', 'About'), 'url' => ['/page/about']],
-            ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']],
-            ['label' => Yii::t('app', 'Manage'), 'url' => ['/admin'], 'visible' => Yii::$app->user->can('admin')],
+            ['label' => 'Home', 'url' => ['/site/index'], 'visible' => Yii::$app->controller->action->getUniqueId() !== 'site/index'],
+            ['label' => 'About', 'url' => ['/page/about']],
+            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Manage', 'url' => ['/admin'], 'visible' => Yii::$app->user->can('admin')],
             Yii::$app->user->isGuest ?
-                ['label' => Yii::t('app', 'Login'), 'url' => ['/account/login']] : '',
+                ['label' => 'Login', 'url' => ['/account/login']] : '',
 
             Yii::$app->user->isGuest ? '' :
                 ['label' => Yii::$app->user->identity->name,
 
                     'items' => [
-                        ['label' => Yii::t('app', 'Account'), 'url' => ['/account']],
-                        ['label' => Yii::t('app', 'Logout'),
+                        ['label' => 'Account', 'url' => ['/account']],
+                        ['label' => 'Logout',
                             'url' => ['/account/logout'],
                             'linkOptions' => ['data-method' => 'post']],
                     ]

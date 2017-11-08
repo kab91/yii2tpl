@@ -46,17 +46,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'create' => function ($url, $model) {
                             return Html::a('<span class="glyphicon glyphicon-plus"></span>', $url, [
-                                'title' => Yii::t('app', 'Add child'),
+                                'title' => 'Add child',
                             ]);
                         },
                     'up' => function ($url, $model) {
                             return Html::a('<span class="glyphicon glyphicon-arrow-up"></span>', $url, [
-                                'title' => Yii::t('app', 'Move up'),
+                                'title' =>'Move up',
                             ]);
                         },
                     'down' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-arrow-down"></span>', $url, [
-                            'title' => Yii::t('app', 'Move down'),
+                            'title' => 'Move down',
                         ]);
                     },
                 ]

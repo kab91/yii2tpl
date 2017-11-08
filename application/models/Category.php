@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use Yii;
 use yii\db\ActiveRecord;
 use creocoder\nestedsets\NestedSetsBehavior;
@@ -14,13 +15,13 @@ use app\models\queries\CategoryQuery;
  */
 class Category extends ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return '{{%category}}';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%category}}';
+    }
 
     public function init()
     {
@@ -28,21 +29,22 @@ class Category extends ActiveRecord
         $this->depthAttribute = 'level';
     }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['name'], 'required'],
-			[['name'], 'string', 'max' => 50]
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'string', 'max' => 50]
+        ];
+    }
 
     /**
      * @inheritdoc
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             [
                 'class' => NestedSetsBehavior::className(),
@@ -59,39 +61,42 @@ class Category extends ActiveRecord
         return new CategoryQuery(get_called_class());
     }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'name' => Yii::t('app', 'Name'),
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'name' => 'Name',
+        ];
+    }
 
     public static function getForSelect($with_root = false)
     {
-        $res = array();
+        $res = [];
         $rawtree = static::find()->addOrderBy('lft')->all();
-        if (!$with_root) array_shift($rawtree);
+        if (!$with_root) {
+            array_shift($rawtree);
+        }
 
         foreach ($rawtree as $curr) {
-            $res[$curr->id] = str_repeat(' . ', ($curr->level - 1 - ($with_root?0:1))) . $curr->name;
+            $res[$curr->id] = str_repeat(' . ', ($curr->level - 1 - ($with_root ? 0 : 1))) . $curr->name;
         }
 
         return $res;
     }
 
-    public function getFullName() {
-        $res=[];
-        $ancestors=$this->ancestors()->all();
+    public function getFullName()
+    {
+        $res = [];
+        $ancestors = $this->ancestors()->all();
         array_shift($ancestors); //remove root
 
-        foreach($ancestors as $curr) {
-            $res[]=$curr->name;
+        foreach ($ancestors as $curr) {
+            $res[] = $curr->name;
         }
-        $res[]=$this->name;
+        $res[] = $this->name;
         return implode(' / ', $res);
     }
 }
