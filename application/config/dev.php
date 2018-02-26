@@ -15,6 +15,10 @@ return [
             'password' => '',
             'enableSchemaCache' => false,
         ],
+        'mail' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => true,
+        ],
         'log' => [
             'traceLevel' => 3,
             'targets' => [
