@@ -48,11 +48,11 @@ return [
             'errorAction' => 'site/error',
         ],
         'mail' => [
+            'class' => 'yii\swiftmailer\Mailer',
             /*'class' => 'yashop\ses\Mailer',
             'access_key' => 'ACCESS_KEY',
             'secret_key' => 'SECRET_KEY',
             'host' => 'AWS_HOST',*/
-
         ],
         'log' => [
             'traceLevel' => 0,
