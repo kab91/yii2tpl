@@ -22,7 +22,7 @@ class UserController extends AdminController
     {
         return ArrayHelper::merge(parent::behaviors(), [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['post'],
                 ],

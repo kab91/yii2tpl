@@ -61,7 +61,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className()
+            TimestampBehavior::class
         ];
     }
 
@@ -83,12 +83,12 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getStatus()
     {
-        return $this->hasOne(Status::className(), ['id' => 'idstatus']);
+        return $this->hasOne(Status::class, ['id' => 'idstatus']);
     }
 
     public function getRoles()
     {
-        return $this->hasMany(AuthItem::className(), ['name' => 'item_name'])->viaTable('x_auth_assignment',
+        return $this->hasMany(AuthItem::class, ['name' => 'item_name'])->viaTable('x_auth_assignment',
             ['user_id' => 'id']);
     }
 

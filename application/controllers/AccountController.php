@@ -5,7 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\web\UploadedFile;
 use yii\web\HttpException;
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -25,7 +25,7 @@ class AccountController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'only' => ['signup', 'logout', 'index', 'update'],
                 'rules' => [
                     [
@@ -41,7 +41,7 @@ class AccountController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -190,7 +190,7 @@ class AccountController extends Controller
     {
         try {
             $model = new ResetPasswordForm($token);
-        } catch (InvalidParamException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 

@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div class="row">
 		<div class="col-lg-5">
 			<?php $form = ActiveForm::begin(['id' => 'reset-password-form']); ?>
-				<?= $form->field($model, 'password')->widget(PasswordInput::classname()) ?>
+				<?= $form->field($model, 'password')->widget(PasswordInput::class) ?>
 				<div class="form-group">
 					<?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
 				</div>

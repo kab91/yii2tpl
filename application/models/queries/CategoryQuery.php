@@ -10,7 +10,7 @@ class CategoryQuery extends ActiveQuery
     {
         return [
             [
-                'class' => NestedSetsQueryBehavior::className(),
+                'class' => NestedSetsQueryBehavior::class,
             ],
         ];
     }

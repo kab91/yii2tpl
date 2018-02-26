@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             [
                 'attribute' => 'id',
-                'class' => \yii\grid\DataColumn::className(),
+                'class' => \yii\grid\DataColumn::class,
                 'headerOptions' => [
                     'style' => 'width: 50px',
                 ],

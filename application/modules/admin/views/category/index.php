@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'layout' => '{items}',
 		'columns' => [
             [
-                'class' => \yii\grid\DataColumn::className(),
+                'class' => \yii\grid\DataColumn::class,
                 'attribute' => 'id',
                 'headerOptions' => [
                     'style' => 'width: 50px'
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-                'class' => \yii\grid\DataColumn::className(),
+                'class' => \yii\grid\DataColumn::class,
                 'attribute' => 'name',
                 'format' => 'raw',
                 'value' => function ($model, $index, $widget) {
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-                'class' => \yii\grid\ActionColumn::className(),
+                'class' => \yii\grid\ActionColumn::class,
                 'template' => '{up} {down} {create} {view} {update} {delete}',
                 'buttons' => [
                     'create' => function ($url, $model) {

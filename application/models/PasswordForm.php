@@ -24,7 +24,7 @@ class PasswordForm extends Model
             [['password', 'newpassword'], 'required'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
-            [['newpassword'], StrengthValidator::className(), 'preset' => 'normal', 'hasUser' => false],
+            [['newpassword'], StrengthValidator::class, 'preset' => 'normal', 'hasUser' => false],
         ];
     }
 

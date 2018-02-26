@@ -64,7 +64,7 @@ class AuthItem extends \yii\db\ActiveRecord
      */
     public function getAuthAssignments()
     {
-        return $this->hasMany(AuthAssignment::className(), ['item_name' => 'name']);
+        return $this->hasMany(AuthAssignment::class, ['item_name' => 'name']);
     }
 
     /**
@@ -72,7 +72,7 @@ class AuthItem extends \yii\db\ActiveRecord
      */
     public function getRuleName()
     {
-        return $this->hasOne(AuthRule::className(), ['name' => 'rule_name']);
+        return $this->hasOne(AuthRule::class, ['name' => 'rule_name']);
     }
 
     /**
@@ -80,7 +80,7 @@ class AuthItem extends \yii\db\ActiveRecord
      */
     public function getAuthItemChildren()
     {
-        return $this->hasMany(AuthItemChild::className(), ['parent' => 'name']);
+        return $this->hasMany(AuthItemChild::class, ['parent' => 'name']);
     }
 
     /**
@@ -88,6 +88,6 @@ class AuthItem extends \yii\db\ActiveRecord
      */
     public function getAuthItemChildren0()
     {
-        return $this->hasMany(AuthItemChild::className(), ['child' => 'name']);
+        return $this->hasMany(AuthItemChild::class, ['child' => 'name']);
     }
 }

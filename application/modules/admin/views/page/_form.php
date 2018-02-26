@@ -10,9 +10,9 @@ use yii\web\JsExpression;
  * @var yii\widgets\ActiveForm $form
  */
 
-$this->registerJsFile('/js/bootstrap-maxlength.min.js', ['depends' => \yii\web\JqueryAsset::className()]);
-$this->registerJsFile('/js/speakingurl.js', ['depends' => \yii\web\JqueryAsset::className()]);
-$this->registerJsFile('/js/slugify.min.js', ['depends' => \yii\web\JqueryAsset::className()]);
+$this->registerJsFile('/js/bootstrap-maxlength.min.js', ['depends' => \yii\web\JqueryAsset::class]);
+$this->registerJsFile('/js/speakingurl.js', ['depends' => \yii\web\JqueryAsset::class]);
+$this->registerJsFile('/js/slugify.min.js', ['depends' => \yii\web\JqueryAsset::class]);
 $this->registerJs("
     $('textarea.seo').maxlength({
         alwaysShow: true,
@@ -35,7 +35,7 @@ $this->registerJs("
 		<?= $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
         <?= $form->field($model, 'slug')->textInput(['maxlength' => 255]) ?>
 
-        <?= $form->field($model, 'content')->widget(vova07\imperavi\Widget::className(), [
+        <?= $form->field($model, 'content')->widget(vova07\imperavi\Widget::class, [
             'settings' => [
                 'lang' => 'ru',
                 'minHeight' => 300,

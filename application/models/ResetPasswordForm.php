@@ -2,7 +2,7 @@
 namespace app\models;
 
 use Yii;
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 use yii\base\Model;
 use app\models\User;
 use kartik\password\StrengthValidator;
@@ -31,11 +31,11 @@ class ResetPasswordForm extends Model
     public function __construct($token, $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidParamException('Password reset token cannot be blank.');
+            throw new InvalidArgumentException('Password reset token cannot be blank.');
         }
         $this->_user = User::findByPasswordResetToken($token);
         if (!$this->_user) {
-            throw new InvalidParamException('Wrong password reset token.');
+            throw new InvalidArgumentException('Wrong password reset token.');
         }
         parent::__construct($config);
     }
@@ -47,7 +47,7 @@ class ResetPasswordForm extends Model
     {
         return [
             ['password', 'required'],
-            [['password'], StrengthValidator::className(), 'preset' => 'normal', 'hasUser' => false],
+            [['password'], StrengthValidator::class, 'preset' => 'normal', 'hasUser' => false],
         ];
     }
 

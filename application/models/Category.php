@@ -47,7 +47,7 @@ class Category extends ActiveRecord
     {
         return [
             [
-                'class' => NestedSetsBehavior::className(),
+                'class' => NestedSetsBehavior::class,
             ],
         ];
     }
