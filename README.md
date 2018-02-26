@@ -1,4 +1,6 @@
 # Yii2 template
 
-* run: mysql -u [user] [pass] [dbname] < data/dump.sql
+Installation:
+
 * run: composer install
+* run: yii migrate
