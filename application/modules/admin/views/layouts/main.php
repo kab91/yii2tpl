@@ -1,8 +1,8 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+use yii\bootstrap4\Nav;
+use yii\bootstrap4\NavBar;
+use yii\bootstrap4\Breadcrumbs;
 use app\assets\AdminAsset;
 use yii\helpers\Url;
 
@@ -31,11 +31,11 @@ AdminAsset::register($this);
         'brandLabel' => 'Dashboard',
         'brandUrl' => Url::to(['/admin']),
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-dark bg-dark navbar-expand-md fixed-top',
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
+        'options' => ['class' => 'navbar-nav ml-auto'],
         'items' => [
             ['label' => 'Categories', 'url' => ['/admin/category']],
             ['label' => 'Pages', 'url' => ['/admin/page']],

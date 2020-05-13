@@ -14,6 +14,10 @@ return [
             'class' => 'app\modules\admin\Module',
         ],
     ],
+    'aliases' => [
+        '@bower' => '@vendor/bower-asset',
+        '@npm' => '@vendor/npm-asset',
+    ],
     'bootstrap' => ['log', 'assetsAutoCompress'],
     'components' => [
         'assetsAutoCompress' => [
